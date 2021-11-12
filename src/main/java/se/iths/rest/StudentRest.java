@@ -52,18 +52,18 @@ public class StudentRest {
     @Path("lastname")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
-    public Response getStudentByLastName(@QueryParam("id") Long id, @QueryParam("lastname") String lastname) {
+    public Response getStudentByLastName(@QueryParam("lastname") String lastname) {
 
         List<Student> students = studentService.findStudentByLastMame(lastname);
 
+
+        List<Student> foundStudents = new ArrayList<>();
         for (Student s : students)
             if (s.getLastName().equals(lastname)) {
-                List<Student> foundStudents = new ArrayList<>();
                 foundStudents.add(s);
-
-                return Response.ok(foundStudents).build();
             }
-        return Response.ok("nothing").build();
+        return Response.ok(foundStudents).build();
+
 
 
     }
