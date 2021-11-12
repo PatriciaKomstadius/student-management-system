@@ -28,6 +28,10 @@ public class StudentService {
         return entityManager.find((Student.class), id);
     }
 
+    public List<Student> findStudentByLastMame(String lastname) {
+        return entityManager.createQuery("select i from Student i", Student.class).getResultList();
+    }
+
     //UPDATE
     public Student updateStudent(Student student) {
         entityManager.merge(student);

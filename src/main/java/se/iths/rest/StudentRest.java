@@ -7,6 +7,9 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Path("students")
@@ -44,6 +47,29 @@ public class StudentRest {
         List<Student> allStudents = studentService.getStudents();
         return Response.ok(allStudents).build();
     }
+
+    //Get by lastname
+    @Path("lastname")
+    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+    public Response getStudentByLastName(@QueryParam("id") Long id, @QueryParam("lastname") String lastname) {
+
+        List<Student> students = studentService.findStudentByLastMame(lastname);
+
+        for (Student s : students)
+            if (s.getLastName().equals(lastname)) {
+                List<Student> foundStudents = new ArrayList<>();
+                foundStudents.add(s);
+
+                return Response.ok(foundStudents).build();
+            }
+        return Response.ok("nothing").build();
+
+
+    }
+
+
+
 
     //PUT
     @Path("")
