@@ -21,7 +21,11 @@ public class StudentService {
 
     //READ
     public List<Student> getStudents() {
-        return entityManager.createQuery("SELECT i FROM Student i", Student.class).getResultList();
+        return entityManager.createQuery("select i from Student i", Student.class).getResultList();
+    }
+
+    public Student findStudentById(Long id) {
+        return entityManager.find((Student.class), id);
     }
 
     //UPDATE
