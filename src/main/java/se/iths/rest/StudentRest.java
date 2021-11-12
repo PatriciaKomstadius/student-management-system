@@ -43,12 +43,12 @@ public class StudentRest {
     //GET all
     @Path("")
     @GET
-    public Response getAllStudents(){
+    public Response getAllStudents() {
         List<Student> allStudents = studentService.getStudents();
         return Response.ok(allStudents).build();
     }
 
-    //Get by lastname
+    //Get student by lastname
     @Path("lastname")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
@@ -56,25 +56,21 @@ public class StudentRest {
 
         List<Student> students = studentService.findStudentByLastMame(lastname);
 
-
         List<Student> foundStudents = new ArrayList<>();
+
         for (Student s : students)
             if (s.getLastName().equals(lastname)) {
                 foundStudents.add(s);
             }
+
         return Response.ok(foundStudents).build();
-
-
-
     }
-
-
 
 
     //PUT
     @Path("")
     @PUT
-    public Response updateStudent(Student student){
+    public Response updateStudent(Student student) {
         studentService.updateStudent(student);
         return Response.ok(student).build();
     }
