@@ -25,7 +25,7 @@ public class StudentRest {
     @POST
     public Response createStudent(Student student) {
         studentService.createStudent(student);
-        return Response.ok(student).build();
+        return Response.ok(student).status(Response.Status.CREATED).build();
     }
 
 
@@ -39,7 +39,7 @@ public class StudentRest {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity("Student with id " + id + " not found.").type(MediaType.APPLICATION_JSON).build());
         }
-            return Response.ok(foundStudent).build();
+            return Response.ok(foundStudent).status(Response.Status.FOUND).build();
 
     }
 
@@ -48,7 +48,7 @@ public class StudentRest {
     @GET
     public Response getAllStudents() {
         List<Student> allStudents = studentService.getStudents();
-        return Response.ok(allStudents).build();
+        return Response.ok(allStudents).status(Response.Status.FOUND).build();
     }
 
     //Get student by lastname
@@ -66,7 +66,7 @@ public class StudentRest {
                 foundStudents.add(s);
             }
 
-        return Response.ok(foundStudents).build();
+        return Response.ok(foundStudents).status(Response.Status.FOUND).build();
     }
 
 
