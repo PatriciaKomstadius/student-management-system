@@ -113,7 +113,7 @@ public class StudentRest {
         }
 
         studentService.deleteStudent(id);
-        return Response.ok("Student deleted.").build();
+        return Response.ok().build();
     }
 
 
