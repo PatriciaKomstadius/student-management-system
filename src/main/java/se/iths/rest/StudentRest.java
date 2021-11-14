@@ -28,6 +28,7 @@ public class StudentRest {
         if (student.getFirstName().isEmpty() || student.getLastName().isEmpty() || student.getEmail().isEmpty()) {
             throw new BadRequestException("You have to fill in firstname, lastname and email");
         }
+
         studentService.createStudent(student);
 
         return Response.ok(student).status(Response.Status.CREATED).build();
@@ -112,7 +113,7 @@ public class StudentRest {
         }
 
         studentService.deleteStudent(id);
-        return Response.ok().build();
+        return Response.ok("Student deleted.").build();
     }
 
 
