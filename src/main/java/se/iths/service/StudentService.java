@@ -28,7 +28,7 @@ public class StudentService {
         return entityManager.find((Student.class), id);
     }
 
-    public List<Student> findStudentByLastMame(String lastname) {
+    public List<Student> findStudentByLastName(String lastname) {
         return entityManager.createQuery("select i from Student i", Student.class).getResultList();
     }
 
@@ -43,7 +43,6 @@ public class StudentService {
         Student studentToDelete = entityManager.find(Student.class, id);
         entityManager.remove(studentToDelete);
     }
-
 
 
 }
