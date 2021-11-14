@@ -5,11 +5,11 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class BadRequestExceptionMapper implements ExceptionMapper<CustomException> {
+public class BadRequestExceptionMapper implements ExceptionMapper<BadRequestException> {
 
 
     @Override
-    public Response toResponse(CustomException exception) {
+    public Response toResponse(BadRequestException exception) {
         ErrorMessage errorMessage = new ErrorMessage(400, exception.getMessage());
         return Response.status(Response.Status.BAD_REQUEST)
                 .entity(errorMessage)
