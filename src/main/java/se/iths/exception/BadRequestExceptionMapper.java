@@ -7,7 +7,6 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class BadRequestExceptionMapper implements ExceptionMapper<BadRequestException> {
 
-
     @Override
     public Response toResponse(BadRequestException exception) {
         ErrorMessage errorMessage = new ErrorMessage(400, exception.getMessage());

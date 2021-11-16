@@ -15,7 +15,4 @@ public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundExceptio
                 .build();
     }
 
-//          return (Response.status(Response.Status.NOT_FOUND)
-  //          .entity("Student with id not found.").type(MediaType.APPLICATION_JSON).build());
-
 }

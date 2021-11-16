@@ -34,7 +34,6 @@ public class StudentRest {
         return Response.ok(student).status(Response.Status.CREATED).build();
     }
 
-
     //GET one
     @Path("{id}")
     @GET
@@ -84,7 +83,6 @@ public class StudentRest {
         return Response.ok(foundStudents).status(Response.Status.FOUND).build();
     }
 
-
     //PUT
     @Path("")
     @PUT
@@ -95,11 +93,9 @@ public class StudentRest {
         if (student.getFirstName().isEmpty() || student.getLastName().isEmpty() || student.getEmail().isEmpty()) {
             throw new BadRequestException("You have to fill in firstname, lastname and email. ");
         }
-
         studentService.updateStudent(student);
         return Response.ok(student).build();
     }
-
 
     //DELETE
     @Path("{id}")
@@ -115,6 +111,5 @@ public class StudentRest {
         studentService.deleteStudent(id);
         return Response.ok().build();
     }
-
 
 }

@@ -26,7 +26,4 @@ public class ErrorMessage {
         this.errorMessage = errorMessage;
     }
 
-
-
-
 }
