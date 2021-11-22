@@ -120,7 +120,7 @@ public class StudentRest {
         return studentService.getNamedStudents();
     }
 
-    //Get students by subject
+    //Get students and teacher by subject
     @Path("subjects/{subject}")
     @GET
     public List<Subject> getStudentsBySubject (@PathParam("subject") String subject) {
