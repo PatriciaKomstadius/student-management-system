@@ -1,6 +1,7 @@
 package se.iths.service;
 
 import se.iths.entity.Student;
+import se.iths.entity.Subject;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -42,4 +43,20 @@ public class StudentService {
         Student studentToDelete = entityManager.find(Student.class, id);
         entityManager.remove(studentToDelete);
     }
+
+    public List<Student> getNamedStudents() {
+        return entityManager.createNamedQuery("studentEntity.findAll", Student.class).getResultList();
+    }
+
+    //Find students by subject
+    public List<Subject> getSubjects(String subject) {
+        String query = "SELECT i.students FROM Subject i JOIN FETCH i.teacher WHERE i.subject = :subject";
+        return entityManager.createQuery(query, Subject.class).
+                setParameter("subject", subject)
+                .getResultList();
+    }
+
+
+
+
 }
