@@ -1,5 +1,6 @@
 package se.iths.rest;
 
+import se.iths.entity.Subject;
 import se.iths.exception.BadRequestException;
 import se.iths.exception.NotFoundException;
 import se.iths.entity.Student;
@@ -111,5 +112,20 @@ public class StudentRest {
         studentService.deleteStudent(id);
         return Response.ok().build();
     }
+
+    //Get all students
+    @Path("getstudents")
+    @GET
+    public List<Student> getNamedStudents() {
+        return studentService.getNamedStudents();
+    }
+
+    //Get students by subject
+    @Path("getsubjects/{subject}")
+    @GET
+    public List<Subject> getStudentsBySubject (@PathParam("subject") String subject) {
+        return studentService.getSubjects(subject);
+    }
+
 
 }
