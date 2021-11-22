@@ -12,6 +12,18 @@ Queries with JPQL
 
 
 ##CREATE
+- **CREATE a new teacher. Post body in JSON.**
+firstName, lastName och email are mandatory.
+
+Example:
+```
+{
+"firstName": "Lollo",
+"lastName" : "Bruno",
+"phoneNumber" : 12345,
+"email" : "lollo@school.com"
+}
+```
 
 - **ADD new subject to teacher. Enter teachers ID as a URL-param and post body with subject in JSON.**
 
@@ -38,22 +50,6 @@ Example:
 _Enter ID number 1 for testing purpose._
 
 
-- **CREATE a new teacher. Post body in JSON.**
-
-Example:
-```
-{
-"firstName": "Lollo",
-"lastName" : "Bruno",
-"phoneNumber" : 12345,
-"email" : "lollo@school.com"
-}
-```
-GET list of all teachers:
-
->URL: http://localhost:8080/student-management-system/api/v1/teachers
-
-
 
 ##READ
 
@@ -62,6 +58,9 @@ GET list of all teachers:
 >URL: http://localhost:8080/student-management-system/api/v1/students/subjects/{subject}  
 > _Enter subject {English} for testing purpose._
 
+GET list of all teachers:
+
+>URL: http://localhost:8080/student-management-system/api/v1/teachers
 
 _____________________________________________________________________________________________
 
