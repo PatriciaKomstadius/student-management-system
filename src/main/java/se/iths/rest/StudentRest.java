@@ -121,7 +121,7 @@ public class StudentRest {
     }
 
     //Get students by subject
-    @Path("getsubjects/{subject}")
+    @Path("subjects/{subject}")
     @GET
     public List<Subject> getStudentsBySubject (@PathParam("subject") String subject) {
         return studentService.getSubjects(subject);
