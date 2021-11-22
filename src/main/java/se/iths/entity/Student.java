@@ -1,11 +1,10 @@
 package se.iths.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+@NamedQuery(name = "studentEntity.findAll", query = "SELECT i FROM Student i")
 @Entity
 public class Student {
 
@@ -20,6 +19,28 @@ public class Student {
     @NotEmpty
     private String email;
     private String phoneNumber;
+
+    @ManyToOne
+    private Subject subject;
+
+    public Student() {
+    }
+
+    public Student(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
 
     public Long getId() {
         return id;
@@ -60,7 +81,6 @@ public class Student {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
 
 
 }
