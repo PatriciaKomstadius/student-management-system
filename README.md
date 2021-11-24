@@ -12,8 +12,9 @@ Queries with JPQL
 
 
 ##CREATE
-- **CREATE a new teacher. Post body in JSON.**
-firstName, lastName och email are mandatory.
+- **CREATE a new teacher:**
+
+Post body in JSON. firstName, lastName och email are mandatory.
 
 Example:
 ```
@@ -25,7 +26,9 @@ Example:
 }
 ```
 
-- **ADD new subject to teacher. Enter teachers ID as a URL-param and post body with subject in JSON.**
+- **ADD a subject to a teacher:**
+
+Enter teachers ID as a URL-param and post body with subject in JSON.
 
 Example:
 ```
@@ -36,14 +39,16 @@ Example:
 >URL: http://localhost:8080/student-management-system/api/v1/teachers/addsubjectsforteacher/{id}  
 _Enter ID number 10 for testing purpose._
 
-- **ADD student to subject.  Specify which subject by entering subject-ID in URL. Post body in JSON.**
+- **ADD student to subject:**
+
+Specify which subject by entering subject-ID in URL. Post body in JSON.
 
 Example:
 ```
 {
 	"firstName" : "David",
 	"lastName" : "Olsson",
-	"email" : "luka@neil.com"
+	"email" : "david@mail.com"
 }
  ```
 >URL: http://localhost:8080/student-management-system/api/v1/subjects/addstudentstosubject/{id}  
@@ -53,12 +58,12 @@ _Enter ID number 1 for testing purpose._
 
 ##READ
 
-**GET All information about a subject _(including list of all enrolled students and teacher)._**
+**- GET All information about a subject _(including list of all enrolled students and teacher):_**
 
 >URL: http://localhost:8080/student-management-system/api/v1/students/subjects/{subject}  
 > _Enter subject {English} for testing purpose._
 
-GET list of all teachers:
+**- GET list of all teachers:**
 
 >URL: http://localhost:8080/student-management-system/api/v1/teachers
 
