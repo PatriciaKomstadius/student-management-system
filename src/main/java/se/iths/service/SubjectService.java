@@ -47,7 +47,7 @@ public class SubjectService {
     }
 
     //ADD STUDENTS TO SUBJECTS
-    public Student addStudentsForSubject(Long id, Student student) {
+    public Student addStudentToSubject(Long id, Student student) {
         entityManager.find(Subject.class, id).addStudent(student);
         return student;
     }

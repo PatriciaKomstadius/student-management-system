@@ -44,7 +44,7 @@ public class SubjectRest {
             throw new BadRequestException("You have to fill in firstname, lastname and email. ");
         }
 
-        subjectService.addStudentsForSubject(id, student);
+        subjectService.addStudentToSubject(id, student);
         return Response.ok(student).build();
     }
 
@@ -62,7 +62,7 @@ public class SubjectRest {
     //Get subject
     @Path("getteacherforsubject/{subject}")
     @GET
-    public List<Subject> getByNameNP(@PathParam("subject") String subject) {
+    public List<Subject> getTeacherBySubjectName(@PathParam("subject") String subject) {
 
         if (subjectService.getSubjectBySubjectName(subject).isEmpty()) {
             throw new NotFoundException("No teacher for " + subject + " is found.");
@@ -73,7 +73,7 @@ public class SubjectRest {
     //Get teacher by lastname
     @Path("getteacherbyname/{lastname}")
     @GET
-    public List<Teacher> getTeacherByNameNP(@PathParam("lastname") String lastName) {
+    public List<Teacher> getTeacherByLastname(@PathParam("lastname") String lastName) {
 
         if (subjectService.getTeacherByLastname(lastName).isEmpty()) {
             throw new NotFoundException("No teacher with lastname " + lastName + " is found.");
