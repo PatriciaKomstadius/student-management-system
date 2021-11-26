@@ -1,10 +1,10 @@
 package se.iths.entity;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+@NamedQuery(name = "subjectEntity.findAll", query = "SELECT i FROM Subject i")
 @Entity
 public class Subject {
 
@@ -13,16 +13,21 @@ public class Subject {
     private Long id;
     private String subject;
 
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
-    private List<Student> students = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "subject_student",
+            joinColumns = @JoinColumn(name = "subject_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName="id"))
+
+    private Set<Student> students = new HashSet<>();
 
     @ManyToOne
+    @JoinColumn(name = "teacher_id", referencedColumnName="id")
     private Teacher teacher;
 
 
     public void addStudent(Student student) {
         students.add(student);
-        student.setSubject(this);
+        student.getSubjects().add(this);
     }
 
     public Subject() {
@@ -32,12 +37,11 @@ public class Subject {
         this.subject = subject;
     }
 
-    @JsonbTransient
-    public List<Student> getStudents() {
+    public Set<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(Set<Student> students) {
         this.students = students;
     }
 
@@ -62,6 +66,7 @@ public class Subject {
     }
 
     public void setTeacher(Teacher teacher) {
-       this.teacher = teacher;
+        this.teacher = teacher;
     }
+
 }

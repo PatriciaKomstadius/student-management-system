@@ -3,6 +3,8 @@ package se.iths.entity;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.HashSet;
+import java.util.Set;
 
 @NamedQuery(name = "studentEntity.findAll", query = "SELECT i FROM Student i")
 @Entity
@@ -20,10 +22,24 @@ public class Student {
     private String email;
     private String phoneNumber;
 
-    @ManyToOne
-    private Subject subject;
+    @ManyToMany(mappedBy = "students", cascade = CascadeType.ALL)
+    private Set<Subject> subjects = new HashSet<>();
 
     public Student() {
+    }
+
+    public void addSubject(Subject subject) {
+        subjects.add(subject);
+        subject.getStudents().add(this);
+    }
+
+    @JsonbTransient
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
 
     public Student(String firstName, String lastName, String email) {
@@ -32,15 +48,6 @@ public class Student {
         this.email = email;
 
     }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
 
     public Long getId() {
         return id;
