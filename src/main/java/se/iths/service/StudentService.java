@@ -38,6 +38,7 @@ public class StudentService {
         entityManager.merge(student);
         return student;
     }
+
     //DELETE
     public void deleteStudent(Long id) {
         Student studentToDelete = entityManager.find(Student.class, id);
@@ -47,16 +48,6 @@ public class StudentService {
     public List<Student> getNamedStudents() {
         return entityManager.createNamedQuery("studentEntity.findAll", Student.class).getResultList();
     }
-
-    //Find students by subject
-    public List<Subject> getSubjects(String subject) {
-        String query = "SELECT i.students FROM Subject i JOIN FETCH i.teacher WHERE i.subject = :subject";
-        return entityManager.createQuery(query, Subject.class).
-                setParameter("subject", subject)
-                .getResultList();
-    }
-
-
 
 
 }

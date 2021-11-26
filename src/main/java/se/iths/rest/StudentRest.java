@@ -123,17 +123,4 @@ public class StudentRest {
         return studentService.getNamedStudents();
     }
 
-
-    //Get list of students and teacher by subject
-    @Path("subjects/{subject}")
-    @GET
-    public List<Subject> getStudentsBySubject (@PathParam("subject") String subject) {
-
-        if (studentService.getSubjects(subject).isEmpty()) {
-            throw new NotFoundException("No students or teacher listed for subject " + subject);
-        }
-        return studentService.getSubjects(subject);
-    }
-
-
 }

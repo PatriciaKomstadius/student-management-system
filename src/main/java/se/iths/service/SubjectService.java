@@ -15,7 +15,6 @@ public class SubjectService {
     @PersistenceContext
     EntityManager entityManager;
 
-
     public Subject createSubject(Subject subject) {
         entityManager.persist(subject);
         return subject;
@@ -29,14 +28,8 @@ public class SubjectService {
     //Get subject with Named Parameters
     public List<Subject> getSubjectBySubjectName(String subject) {
         String query = "SELECT i FROM Subject i WHERE i.subject = :subject";
-        return entityManager.createQuery(query, Subject.class).setParameter("subject", subject).getResultList();
-    }
-
-    //Get all students by subject
-    public List<Subject> getAllStudentsBySubject(String subject) {
-        String query = "SELECT i FROM Subject i WHERE i.subject = :subject";
-        return entityManager.createQuery(query, Subject.class).
-                setParameter("subject", subject)
+        return entityManager.createQuery(query, Subject.class)
+                .setParameter("subject", subject)
                 .getResultList();
     }
 
@@ -46,10 +39,13 @@ public class SubjectService {
         return entityManager.createQuery(query, Teacher.class).setParameter("lastName", lastName).getResultList();
     }
 
-    //ADD STUDENTS TO SUBJECTS
+    //Add student to subject
     public Student addStudentToSubject(Long id, Student student) {
+
         entityManager.find(Subject.class, id).addStudent(student);
+        entityManager.merge(student);
         return student;
     }
+
 
 }

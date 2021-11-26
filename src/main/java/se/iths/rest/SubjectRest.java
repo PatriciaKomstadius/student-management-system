@@ -3,7 +3,6 @@ package se.iths.rest;
 import se.iths.entity.Student;
 import se.iths.entity.Subject;
 import se.iths.entity.Teacher;
-import se.iths.exception.BadRequestException;
 import se.iths.exception.NotFoundException;
 import se.iths.service.SubjectService;
 
@@ -24,33 +23,26 @@ public class SubjectRest {
 
     @Path("")
     @POST
-    public Response createSubject(Subject subject){
+    public Response createSubject(Subject subject) {
 
         Subject subjectResult = subjectService.createSubject(subject);
         return Response.ok(subjectResult).build();
     }
 
-    //ADD STUDENTS FOR SUBJECTS
-    @Path("addstudentstosubject/{id}")
+    //ADD STUDENT TO SUBJECT
+    @Path("addstudenttosubject/{id}")
     @POST
-    public Response createSubjectForTeacher(@PathParam("id")Long id, Student student){
-
-        Subject foundSubject = subjectService.findSubjectById(id);
-
-        if (foundSubject == null) {
-            throw new NotFoundException("Subject with ID " + id + " doesnt exist. Unable to enroll student to subject.");
-        }
-        if (student.getFirstName().isEmpty() || student.getLastName().isEmpty() || student.getEmail().isEmpty()) {
-            throw new BadRequestException("You have to fill in firstname, lastname and email. ");
-        }
+    public Response createSubjectForStudent(@PathParam("id") Long id, Student student) {
 
         subjectService.addStudentToSubject(id, student);
+
         return Response.ok(student).build();
     }
 
+    //GET ALL INFO ABOUT SUBJECT BY ID
     @Path("{id}")
     @GET
-    public Response getSubject(@PathParam("id") Long id){
+    public Response getListOfStudentsAndTeacherForSubject(@PathParam("id") Long id) {
         Subject foundSubject = subjectService.findSubjectById(id);
 
         if (foundSubject == null) {
@@ -59,10 +51,11 @@ public class SubjectRest {
         return Response.ok(foundSubject).build();
     }
 
-    //Get subject
-    @Path("getteacherforsubject/{subject}")
+    //Get ALL INFO ABOUT SUBJECT BY SUBJECTNAME
+    @Path("all/{subject}")
     @GET
     public List<Subject> getTeacherBySubjectName(@PathParam("subject") String subject) {
+
 
         if (subjectService.getSubjectBySubjectName(subject).isEmpty()) {
             throw new NotFoundException("No teacher for " + subject + " is found.");
@@ -80,6 +73,5 @@ public class SubjectRest {
         }
         return subjectService.getTeacherByLastname(lastName);
     }
-
 
 }

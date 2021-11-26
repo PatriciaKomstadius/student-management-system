@@ -1,7 +1,5 @@
 package se.iths.rest;
 
-
-import se.iths.entity.Student;
 import se.iths.entity.Subject;
 import se.iths.entity.Teacher;
 import se.iths.exception.BadRequestException;
@@ -12,7 +10,6 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 
 @Path("teachers")
@@ -25,7 +22,7 @@ public class TeacherRest {
 
     @Path("")
     @POST
-    public Response createTeacher(Teacher teacher){
+    public Response createTeacher(Teacher teacher) {
 
         if (teacher.getFirstName().isEmpty() || teacher.getLastName().isEmpty() || teacher.getEmail().isEmpty()) {
             throw new BadRequestException("You have to fill in firstname, lastname and email");
@@ -44,10 +41,10 @@ public class TeacherRest {
         return teacherService.getAllTeachers();
     }
 
-    //ADD SUBJECTS FOR TEACHER BY ID
-    @Path("addsubjectsforteacher/{id}")
+    //ADD SUBJECTS TO TEACHER BY ID
+    @Path("addsubjectstoteacher/{id}")
     @POST
-    public Response createSubjectForTeacher(@PathParam("id")Long id, Subject subject) {
+    public Response createSubjectForTeacher(@PathParam("id") Long id, Subject subject) {
 
         Teacher foundTeacher = teacherService.findTeacherById(id);
 
@@ -55,8 +52,9 @@ public class TeacherRest {
             throw new se.iths.exception.BadRequestException("Teacher with ID " + id + " doesn't exist");
         }
         teacherService.createSubjectForTeacher(id, subject);
-        return Response.ok(subject).build();
-    }
 
+        return Response.ok(subject).build();
+
+    }
 
 }
